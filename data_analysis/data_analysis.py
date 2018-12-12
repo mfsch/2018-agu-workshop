@@ -17,8 +17,8 @@ def fetch_data(location):
 
 def moving_average(data, window):
     avg = np.full(data.size, np.nan)
-    for i in range(6, data.size - 6):
-        avg[i] = np.mean(data[i-6:i+6])
+    for i in range(window, data.size - window):
+        avg[i] = np.mean(data[i-window:i+window])
     return avg
 
 def test_moving_average():
