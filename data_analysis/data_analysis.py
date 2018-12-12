@@ -9,6 +9,9 @@ def gen_url(location):
     url = 'http://berkeleyearth.lbl.gov/auto/Regional/TAVG/Text/%s-TAVG-Trend.txt' % location.lower()
     return url
 
+"""
+Download data for a given location.
+"""
 def fetch_data(location):
     url = gen_url(location)
     response = requests.get(url)
@@ -20,9 +23,3 @@ def moving_average(data, window):
     for i in range(window, data.size - window):
         avg[i] = np.mean(data[i-window:i+window])
     return avg
-
-def test_moving_average():
-    avg = moving_average(np.ones(10), 2)
-    assert np.all(np.isnan(avg[0:2]))
-    assert np.all(np.isnan(avg[-2:]))
-    assert np.allclose(avg[2:-2], 1)
